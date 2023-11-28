@@ -15,3 +15,5 @@ How to run this script
 7. Run the script http://localhost/deb-php-mysqli-crud or http://deb-php-mysqli-crud.test in case if you are using Laragon
 
 8. Start completing the project using CRUD Operations - only PHP Procedural and MySQLi are required
+
+9. Change your data connection from config/dbconnection.php
