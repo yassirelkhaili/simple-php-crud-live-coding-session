@@ -2,7 +2,7 @@ How to run this script
 
 1. Read ReadMe first
 
-2. Clone the project "php-mysqli-crud" folder
+2. Clone the project "deb-php-mysqli-crud" repository
 
 3. Paste inside root directory(for xampp xampp/htdocs, for laragon laragon/www, for lamp in linux var/www/html)
 

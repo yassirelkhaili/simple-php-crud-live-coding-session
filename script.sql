@@ -28,19 +28,18 @@ SET time_zone = "+00:00";
 -- Table structure for table `villes`
 --
 
-CREATE TABLE IF NOT EXISTS `ville` (
+CREATE TABLE IF NOT EXISTS `villes` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `ville` varchar(40) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  `region` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
+  `ville` varchar(40) NOT NULL,
+  PRIMARY KEY (`id`)
 
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=403 ;
+);
 
 --
--- Contenu de la table `ville`
+-- Content of table `villes`
 --
 
-INSERT INTO `ville` (`id`, `ville`) VALUES
+INSERT INTO `villes` (`id`, `ville`) VALUES
 (1, 'Aïn Harrouda'),
 (2, 'Ben Yakhlef'),
 (3, 'Bouskoura'),
