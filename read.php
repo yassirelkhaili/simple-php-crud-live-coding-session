@@ -1,6 +1,3 @@
-<?php
-include('config/dbconnection.php');
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -32,32 +29,43 @@ include('config/dbconnection.php');
                
 <tbody>
 <?php
+            include('./config/dbconnection.php');
 // Code for Viewing Records (Read Operation)
+require("./config/dbconnection.php");
+$sql = "SELECT * FROM `deb`.`users`";
+$result = $mysqli->query($sql);
 
-?>
- <tr>
-    <th>First Name</th>
-    <td><?php  echo "first name"?></td>
-    <th>Last Name</th>
-    <td><?php  echo "last name";?></td>
-  </tr>
-  <tr>
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        echo "<tr>
+        <th>First Name</th>
+        <td>$row[FirstName]</td>
+        <th>Last Name</th>
+        <td>$row[LastName]</td>
+      </tr>
+      <tr>
     <th>Email</th>
-    <td><?php  echo "email";?></td>
+    <td>$row[Email]</td>
     <th>Mobile Number</th>
-    <td><?php  echo "mobile number";?></td>
+    <td>$row[MobileNumber]</td>
   </tr>
   <tr>
     <th>Address</th>
-    <td><?php  echo "Address";?></td>
+    <td>$row[Address]</td>
     <th>Creation Date</th>
-    <td><?php  echo "Creation date";?></td>
+    <td>$row[CreationDate]</td>
   </tr>
   <tr>
     <th>City</th>
-    <td><?php  echo "city";?></td>
+    <td>$row[ville_id]</td>
   </tr>
-                 
+               ";
+    }
+} else {
+    echo "0 results";
+}
+$mysqli->close();
+?>  
 </tbody>
 </table>
        

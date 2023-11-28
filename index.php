@@ -48,37 +48,70 @@
                     </tr>
                 </thead>
                 <tbody>
-                     <?php
-// Code for Viewing Records (Read Operation) Users with villes table Don't forget to use join
+                <?php
+            include('./config/dbconnection.php');
+$sql = "SELECT * FROM `users` LEFT JOIN `villes` ON `villes`.`id` = `users`.`ville_id`";
+$result = $mysqli->query($sql);
 
-// Fetch the records from the database
-?>
-                    <tr>
-                        <td><?php echo "counter id";?></td>
-                        <td><?php  echo "first name and last name from database";?></td>
-                        <td><?php  echo "email from database";?></td>                        
-                        <td><?php  echo "phone number from database";?></td>
-                        <td><?php  echo "city from database";?></td>
-                        <td> <?php  echo "created date from database";?></td>
-                        <td>city</td>
-                        <td>
-  <a href="read.php?viewid=<?php echo htmlentities ($row['ID']);?>" class="view" title="View" data-toggle="tooltip"><i class="material-icons">&#xE417;</i></a>
-                            <a href="edit.php?editid=<?php echo htmlentities ($row['ID']);?>" class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
-                            <a href="index.php?delid=<?php echo ($row['ID']);?>" class="delete" title="Delete" data-toggle="tooltip" onclick="return confirm('Do you really want to Delete ?');"><i class="material-icons">&#xE872;</i></a>
-                        </td>
-                    </tr>
-
-<!-- If no records found -->
-<tr>
-    <th style="text-align:center; color:red;" colspan="6">No Record Found</th>
-</tr>
-          
-                
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        echo "<tr>
+        <td>$row[ID]</td>
+        <td>$row[FirstName] $row[LastName]</td>
+        <td>$row[Email]</td>                        
+        <td>$row[MobileNumber]</td>
+        <td>$row[CreationDate]</td>
+        <td>$row[ville]</td>
+        <td>
+<a href='read.php?viewid=<?php echo htmlentities ($row[ID]);?>' class='view' title='View' data-toggle='tooltip'><i class='material-icons'>&#xE417;</i></a>
+            <a href='edit.php?id=$row[ID]' class='edit' title='Edit' data-toggle='tooltip'><i class='material-icons'>&#xE254;</i></a>
+            <a href='delete.php?id=$row[ID]' class='delete' title='Delete' data-toggle='tooltip' onclick='return confirm('Do you really want to Delete ?')'><i class='material-icons'>&#xE872;</i></a>
+        </td>
+    </tr>";
+    }
+} else {
+    echo "<tr>
+    <th style='text-align:center; color:red;' colspan='6'>No Record Found</th>
+</tr>";
+}
+$mysqli->close();
+?>                      
                 </tbody>
             </table>
        
         </div>
     </div>
-</div>     
+</div>
 </body>
 </html>
+
+<tbody>
+                <?php
+            include('./config/dbconnection.php');
+$sql = "SELECT * FROM users LEFT JOIN villes ON villes.id = users.ville_id";
+$result = $mysqli->query($sql);
+
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        echo "<tr>
+        <td>$row[ID]</td>
+        <td>$row[FirstName] $row[LastName]</td>
+        <td>$row[Email]</td>
+        <td>$row[MobileNumber]</td>
+        <td>$row[CreationDate]</td>
+        <td>$row[ville]</td>
+        <td>
+<a href='read.php?viewid=<?php echo htmlentities ($row[ID]);?>' class='view' title='View' data-toggle='tooltip'><i class='material-icons'>&#xE417;</i></a>
+            <a href='edit.php?id=$row[ID]' class='edit' title='Edit' data-toggle='tooltip'><i class='material-icons'>&#xE254;</i></a>
+            <a href='delete.php?id=$row[ID]' class='delete' title='Delete' data-toggle='tooltip' onclick='return confirm('Do you really want to Delete ?')'><i class='material-icons'>&#xE872;</i></a>
+        </td>
+    </tr>";
+    }
+} else {
+    echo "<tr>
+    <th style='text-align:center; color:red;' colspan='6'>No Record Found</th>
+</tr>";
+}
+$mysqli->close();
+?>
+                </tbody>

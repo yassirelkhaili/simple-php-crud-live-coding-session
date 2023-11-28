@@ -456,6 +456,6 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`FirstName`, `LastName`, `MobileNumber`, `Email`, `Address`, `CreationDate`, `ville_id`) VALUES
 ('Nabil', 'Slimani', 06060607070, 'n.slimani@gmail.com', 'H-0908 Johar Market Kolkata', '2020-09-19 17:19:31', 7),
-('Sara', 'Fathi', 'Pandey', 5454987631, 'saraita@gmail.com', 'H-987 Bihari Puram Ghazibad', '2020-09-20 09:01:18', 10),
+('Sara', 'Fathi', 5454987631, 'saraita@gmail.com', 'H-987 Bihari Puram Ghazibad', '2020-09-20 09:01:18', 10),
 ('Mohammed', 'Karout', 0654564464, 'moukaroutvilles@gmail.com', 'J&K Block-789 Laxmi Nagar', '2020-09-20 09:00:28', 1);
 

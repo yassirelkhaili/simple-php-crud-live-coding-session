@@ -1,12 +1,32 @@
-<?php 
-//Database Connection
+<?php
+include('./config/dbconnection.php');
+if (isset($_POST['submit']) && isset($_GET["id"])) {
+$id = $_GET["id"];
+$firstname = $_POST["fname"];
+$lastname = $_POST["lname"];
+$contact = $_POST["contactno"];
+$email = $_POST["email"];
+$address = $_POST["address"];
+$city = $_POST["city"];
+$sql = "UPDATE `deb`.`users` SET `FirstName`='$firstname', `LastName`='$lastname', `MobileNumber`='$contact', `Email`='$email', `Address`='$address', `ville_id`='$city' WHERE id=$id";
+$result = $mysqli->query($sql);
+if ($result === TRUE) {
+header("Location: http://localhost/");
+} else {
+echo "there was a problem" + $mysqli->error;
+}
+$mysqli->close();
+}
+?>  
+ <?php
+            include('./config/dbconnection.php');
+			$id = $_GET["id"];
+$sql = "SELECT * FROM `users` WHERE id='$id'";
+$result = $mysqli->query($sql);
 
-  	//Getting Post Values
-
-
-    //Query for data updation
-
-?>
+    $row = $result->fetch_assoc();
+$mysqli->close();
+?>        
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -25,38 +45,45 @@
 <body>
 <div class="signup-form">
     <form  method="POST">
- <?php
- // Code for Updation (Update Operation)
-
-// get id through query string
-// select query for updating user info 
- // fetch data from database
-?>
 		<h2>Update </h2>
 		<p class="hint-text">Update your info.</p>
         <div class="form-group">
 			<div class="row">
-				<div class="col"><input type="text" class="form-control" name="fname" value="<?php  echo "first name";?>" required="true"></div>
-				<div class="col"><input type="text" class="form-control" name="lname" value="<?php  echo "last name";?>" required="true"></div>
+				<div class="col"><input type="text" class="form-control" name="fname" value="<?php  echo $row["FirstName"];?>" required="true"></div>
+				<div class="col"><input type="text" class="form-control" name="lname" value="<?php  echo $row["LastName"];?>" required="true"></div>
 			</div>        	
         </div>
         <div class="form-group">
-            <input type="text" class="form-control" name="contactno" value="<?php  echo "mobile phone";?>" required="true" maxlength="10" pattern="[0-9]+">
+            <input type="text" class="form-control" name="contactno" value="<?php  echo $row["MobileNumber"];?>" required="true" maxlength="10">
         </div>
         <div class="form-group">
-        	<input type="email" class="form-control" name="email" value="<?php  echo "email"?>" required="true">
+        	<input type="email" class="form-control" name="email" value="<?php  echo $row["Email"];?>" required="true">
         </div>
 		
 		<div class="form-group">
-            <textarea class="form-control" name="address" required="true"><?php  echo "address";?></textarea>
+            <textarea class="form-control" name="address" required="true"><?php  echo $row["Address"];?></textarea>
         </div>
         <!-- get city from database -->
-		<select>
-			<option value="0">Select City</option>
-			<option value="1">Delhi</option>
-			<option value="2">Mumbai</option>
-			<option value="3">Pune</option>
-			<option value="4">Banglore</option>
+		<select name="city">
+		<option value="0">Select City</option>
+			<?php
+            include('./config/dbconnection.php');
+$sql = "SELECT * FROM `deb`.`villes`";
+$result = $mysqli->query($sql);
+
+if ($result->num_rows > 0) {
+    while ($row2 = $result->fetch_assoc()) {
+        if ($row["ville_id"] === $row2["id"]) {
+			echo "<option value='$row2[id]' selected>$row2[ville]</option>";
+		} else {
+			echo "<option value='$row2[id]'>$row2[ville]</option>";
+		}
+    }
+} else {
+    echo "0 results";
+}
+$mysqli->close();
+?>  
 		</select>
 	
 		<div class="form-group">

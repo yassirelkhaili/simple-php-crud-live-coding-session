@@ -1,7 +1,11 @@
 <?php
-$con=mysqli_connect("localhost", "root", "", "deb_crud");
-if(mysqli_connect_errno())
-{
-echo "Connection Fail".mysqli_connect_error();
+$host = "localhost:3301";
+$username = "root";
+$password = "";
+$db = "deb";
+
+$mysqli = new mysqli($host, $username, $password, $db);
+if ($mysqli->connect_error) {
+    printf("an error has occurred", $mysqli->connect_error);
 }
 ?>

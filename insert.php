@@ -1,13 +1,22 @@
-<?php 
-//Databse Connection file
-
-
-  	//getting the post values
-
-   
-  // Query for data insertion users and select villes
-
-?>
+<?php
+include('./config/dbconnection.php');
+if (isset($_POST['submit'])) {
+$firstname = $_POST["fname"];
+$lastname = $_POST["lname"];
+$contact = $_POST["contactno"];
+$email = $_POST["email"];
+$address = $_POST["address"];
+$city = $_POST["city"];
+$sql = "INSERT INTO `deb`.`users` (`FirstName`, `LastName`, `MobileNumber`, `Email`, `Address`, `ville_id`) VALUES ('$firstname', '$lastname', '$contact', '$email', '$address', '$city')";
+$result = $mysqli->query($sql);
+if ($result === TRUE) {
+header("Location: http://localhost/");
+} else {
+echo "there was a problem" + $mysqli->error;
+}
+$mysqli->close();
+}
+?>              
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -45,12 +54,22 @@
 		<div class="form-group">
             <textarea class="form-control" name="address" placeholder="Enter Your Address" required="true"></textarea>
         </div>
-		<select>
-			<option value="0">Select City</option>
-			<option value="1">Delhi</option>
-			<option value="2">Mumbai</option>
-			<option value="3">Pune</option>
-			<option value="4">Banglore</option>
+		<select name="city">
+		<option value="0">Select City</option>
+			<?php
+            include('./config/dbconnection.php');
+$sql = "SELECT * FROM `deb`.`villes`";
+$result = $mysqli->query($sql);
+
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        echo "<option value='$row[id]'>$row[ville]</option>";
+    }
+} else {
+    echo "0 results";
+}
+$mysqli->close();
+?>  
 		</select>
       
 		<div class="form-group">
